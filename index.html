@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Your Name] | Game Dev, 3D Artist &amp; UI/UX Designer</title>
+    <meta name="description" content="Premium portfolio of [Your Name], game developer, 3D design enthusiast, photographer, and UI/UX designer.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Custom Magnetic Cursor -->
+    <div class="custom-cursor" id="custom-cursor"></div>
+    <div class="custom-cursor-dot" id="custom-cursor-dot"></div>
+
+    <!-- Living Neural Canvas Background -->
+    <canvas id="neural-canvas"></canvas>
+
+    <!-- Ambient Glowing Orbs -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <!-- Global Sound Toggle -->
+    <button class="sound-toggle" id="sound-toggle" aria-label="Toggle sound feedback">
+        <i data-lucide="volume-2"></i>
+    </button>
+
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo magnetic" id="nav-logo">
+                <span class="logo-accent">&lt;</span>NEURAL<span class="logo-accent">.IO&gt;</span>
+            </a>
+            <nav class="nav-menu">
+                <a href="#about" class="nav-link magnetic">About</a>
+                <a href="#skills" class="nav-link magnetic">Skills</a>
+                <a href="#projects" class="nav-link magnetic">Projects</a>
+                <a href="#achievements" class="nav-link magnetic">Achievements</a>
+                <a href="#education" class="nav-link magnetic">Journey</a>
+                <a href="#contact" class="nav-link magnetic">Connect</a>
+            </nav>
+            <button class="btn-command magnetic" id="cmd-menu-trigger" title="Open Console Menu">
+                <i data-lucide="terminal"></i> <span>Console</span> <kbd class="kbd-hint">Cmd+K</kbd>
+            </button>
+        </div>
+    </header>
+
+    <!-- Command Menu Modal (Cmd+K) -->
+    <div class="cmd-overlay" id="cmd-overlay">
+        <div class="cmd-box glass">
+            <div class="cmd-search-wrapper">
+                <i data-lucide="search" class="cmd-search-icon"></i>
+                <input type="text" id="cmd-search-input" placeholder="Type a command or section..." autocomplete="off">
+                <span class="cmd-esc">ESC</span>
+            </div>
+            <div class="cmd-results" id="cmd-results">
+                <div class="cmd-section-title">Navigation</div>
+                <div class="cmd-item" data-action="scroll" data-target="#about"><i data-lucide="user"></i> Go to About Section</div>
+                <div class="cmd-item" data-action="scroll" data-target="#skills"><i data-lucide="cpu"></i> Go to Skills Matrix</div>
+                <div class="cmd-item" data-action="scroll" data-target="#projects"><i data-lucide="layers"></i> Go to Projects Grid</div>
+                <div class="cmd-item" data-action="scroll" data-target="#achievements"><i data-lucide="award"></i> Go to Achievements</div>
+                <div class="cmd-item" data-action="scroll" data-target="#education"><i data-lucide="graduation-cap"></i> Go to Journey</div>
+                <div class="cmd-item" data-action="scroll" data-target="#contact"><i data-lucide="send"></i> Go to Connect</div>
+                
+                <div class="cmd-section-title">Interactive Commands</div>
+                <div class="cmd-item" data-action="cmd" data-val="/clear"><i data-lucide="trash-2"></i> Clear CLI Terminal</div>
+                <div class="cmd-item" data-action="cmd" data-val="/glow"><i data-lucide="sparkles"></i> Toggle Accent Glows</div>
+                <div class="cmd-item" data-action="cmd" data-val="/matrix"><i data-lucide="binary"></i> Trigger Matrix Rain</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="main-wrapper">
+
+        <!-- HERO SECTION -->
+        <section class="hero-section" id="hero">
+            <div class="hero-content">
+                <div class="hero-badge reveal-item">
+                    <span class="pulse-dot green"></span>
+                    <span class="badge-text">STATUS: RENDERING CREATIVE NODES</span>
+                </div>
+                <h1 class="hero-title reveal-item">
+                    Forging Worlds. <span class="gradient-text">Designing</span> Experience.
+                </h1>
+                <p class="hero-subtitle reveal-item">
+                    An interactive creative workspace showcasing gameplay mechanics, procedural 3D modeling, lighting photography, and high-fidelity user interface details.
+                </p>
+                <div class="hero-cta reveal-item">
+                    <a href="#projects" class="btn btn-primary magnetic">
+                        <span>Explore Creations</span>
+                        <i data-lucide="arrow-up-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary magnetic">
+                        <span>Initiate Protocol</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- HERO INTERACTIVE TERMINAL -->
+            <div class="hero-terminal-wrapper reveal-item">
+                <div class="terminal glass">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <span class="t-dot red"></span>
+                            <span class="t-dot yellow"></span>
+                            <span class="t-dot green"></span>
+                        </div>
+                        <div class="terminal-title">neural-cli // session: active</div>
+                        <div class="terminal-stats">
+                            <span class="stat-latency">LATENCY: 12ms</span>
+                        </div>
+                    </div>
+                    <div class="terminal-body" id="terminal-body">
+                        <div class="terminal-line system-msg">Initializing digital consciousness... Done.</div>
+                        <div class="terminal-line system-msg">Welcome, guest node. Type <span class="cmd-highlight">/help</span> or click suggestions to interface.</div>
+                        <div class="terminal-line suggestions">
+                            <button class="term-sugg-btn" data-cmd="/about">/about</button>
+                            <button class="term-sugg-btn" data-cmd="/skills">/skills</button>
+                            <button class="term-sugg-btn" data-cmd="/projects">/projects</button>
+                            <button class="term-sugg-btn" data-cmd="/matrix">/matrix</button>
+                        </div>
+                    </div>
+                    <div class="terminal-input-line">
+                        <span class="prompt">guest@neural-network:~$</span>
+                        <input type="text" id="terminal-input" placeholder="Type command here..." autofocus autocomplete="off">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SYSTEM STATUS DASHBAR -->
+            <div class="hero-dashbar reveal-item">
+                <div class="dash-item"><span class="dash-label">CORE STATE:</span> <span class="dash-val glow-cyan">OPERATIONAL</span></div>
+                <div class="dash-item"><span class="dash-label">ENERGY:</span> <span class="dash-val glow-green">100%</span></div>
+                <div class="dash-item"><span class="dash-label">EXP VALUE:</span> <span class="dash-val" id="exp-counter">9,820</span></div>
+            </div>
+        </section>
+
+        <!-- ABOUT BENTO GRID SECTION -->
+        <section class="about-section scroll-reveal" id="about">
+            <div class="section-header">
+                <span class="section-tag">// IDENTITY ARCHIVE</span>
+                <h2 class="section-title">The Bento Files.</h2>
+            </div>
+            
+            <div class="bento-grid">
+                <!-- Bio Card (Large) -->
+                <div class="bento-card card-lg glass magnetic-tilt">
+                    <div class="card-glow"></div>
+                    <div class="bio-wrapper">
+                        <div class="bio-avatar">
+                            <img src="assets/avatar.jpg" alt="Developer Avatar" class="avatar-img">
+                            <div class="avatar-glow"></div>
+                        </div>
+                        <div class="bio-content">
+                            <h3>[Your Name]</h3>
+                            <p class="title-label">Game Developer, 3D Artist &amp; UI/UX Designer</p>
+                            <p class="bio-text">
+                                Budding game developer, 3D design enthusiast, photographer, and UI/UX designer. I build virtual environments, model high-fidelity geometries, capture street frames, and engineer dynamic layouts inspired by Apple's minimal product design and Stripe's interactive web physics.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status Card (Medium) -->
+                <div class="bento-card card-md glass magnetic-tilt">
+                    <div class="card-glow"></div>
+                    <div class="status-card-content">
+                        <span class="card-label">CURRENT PIPELINE</span>
+                        <div class="status-title">Procedural Landscape Shader in Unreal 5</div>
+                        <p class="status-desc">Building procedural terrain systems, texturing with Substance, and drafting custom node materials for real-time game loops.</p>
+                        <div class="status-radar">
+                            <div class="radar-ping"></div>
+                            <span class="radar-text">LOCATED: [City, Country] / REMOTE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Clock Widget (Small) -->
+                <div class="bento-card card-sm glass magnetic-tilt">
+                    <div class="card-glow"></div>
+                    <div class="time-card-content">
+                        <span class="card-label">LOCAL SYSTEM TIME</span>
+                        <div class="clock-display" id="local-clock">00:00:00</div>
+                        <span class="timezone-label" id="timezone-label">UTC +05:30 // ACTIVE TIME</span>
+                    </div>
+                </div>
+
+                <!-- Core Values Card (Medium) -->
+                <div class="bento-card card-md glass magnetic-tilt">
+                    <div class="card-glow"></div>
+                    <div class="values-content">
+                        <span class="card-label">DESIGN PHILOSOPHY</span>
+                        <ul class="principles-list">
+                            <li>
+                                <div class="principle-num">01</div>
+                                <div class="principle-info">
+                                    <h4>Cinematic Lighting</h4>
+                                    <p>Depth, mood, ray-traced shadows, and color theory guidelines.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="principle-num">02</div>
+                                <div class="principle-info">
+                                    <h4>Tactile Physics</h4>
+                                    <p>Dynamic weight, visual momentum, and fluid gameplay controller feedback loops.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="principle-num">03</div>
+                                <div class="principle-info">
+                                    <h4>Zero Friction</h4>
+                                    <p>Pixel-perfect UI alignment, rich interaction visual states, and low-latency render cycles.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tech Stats Card (Small) -->
+                <div class="bento-card card-sm glass magnetic-tilt">
+                    <div class="card-glow"></div>
+                    <div class="tech-stats-content">
+                        <span class="card-label">COGNITIVE RATINGS</span>
+                        <div class="stat-bars">
+                            <div class="stat-bar-item">
+                                <div class="bar-labels"><span>Gameplay Scripting</span><span>92%</span></div>
+                                <div class="bar-track"><div class="bar-fill" style="width: 92%"></div></div>
+                            </div>
+                            <div class="stat-bar-item">
+                                <div class="bar-labels"><span>3D Art &amp; Lighting</span><span>90%</span></div>
+                                <div class="bar-track"><div class="bar-fill" style="width: 90%"></div></div>
+                            </div>
+                            <div class="stat-bar-item">
+                                <div class="bar-labels"><span>Interaction &amp; UI/UX</span><span>98%</span></div>
+                                <div class="bar-track"><div class="bar-fill" style="width: 98%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS MATRIX SECTION -->
+        <section class="skills-section scroll-reveal" id="skills">
+            <div class="section-header">
+                <span class="section-tag">// CAPABILITY GRAPH</span>
+                <h2 class="section-title">The Skills Matrix.</h2>
+                <p class="section-subtitle">Click a sector node below to illuminate corresponding nodes and focus energy paths.</p>
+            </div>
+
+            <div class="skills-interactive-container">
+                <div class="skills-categories-tabs">
+                    <button class="skills-tab active" data-category="frontend">
+                        <i data-lucide="gamepad-2"></i> Game Dev
+                    </button>
+                    <button class="skills-tab" data-category="backend">
+                        <i data-lucide="box"></i> 3D Design
+                    </button>
+                    <button class="skills-tab" data-category="ai">
+                        <i data-lucide="camera"></i> UI/UX &amp; Photo
+                    </button>
+                    <button class="skills-tab" data-category="devops">
+                        <i data-lucide="code"></i> Creative Stack
+                    </button>
+                </div>
+
+                <div class="skills-display-grid">
+                    <!-- Game Dev Skills -->
+                    <div class="skills-group active" id="skills-frontend">
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="Unreal Engine 5">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">Unreal Engine 5</span>
+                            <span class="skill-badge-level">95%</span>
+                        </div>
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="C++ Scripting">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">C++ Scripting</span>
+                            <span class="skill-badge-level">88%</span>
+                        </div>
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="Unity / C#">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">Unity / C#</span>
+                            <span class="skill-badge-level">90%</span>
+                        </div>
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="Niagara / VFX">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">Niagara / VFX</span>
+                            <span class="skill-badge-level">85%</span>
+                        </div>
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="Gameplay Physics">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">Gameplay Physics</span>
+                            <span class="skill-badge-level">92%</span>
+                        </div>
+                    </div>
+
+                    <!-- 3D Design Skills -->
+                    <div class="skills-group" id="skills-backend">
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="Blender Modeling">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">Blender Modeling</span>
+                            <span class="skill-badge-level">95%</span>
+                        </div>
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="Substance Texturing">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">Substance Texturing</span>
+                            <span class="skill-badge-level">88%</span>
+                        </div>
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="WebGL / Three.js">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">WebGL / Three.js</span>
+                            <span class="skill-badge-level">86%</span>
+                        </div>
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="Lighting &amp; Rendering">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">Lighting &amp; Rendering</span>
+                            <span class="skill-badge-level">90%</span>
+                        </div>
+                    </div>
+
+                    <!-- UI/UX & Photo Skills -->
+                    <div class="skills-group" id="skills-ai">
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="Figma Design">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">Figma Design</span>
+                            <span class="skill-badge-level">96%</span>
+                        </div>
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="Design Systems">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">Design Systems</span>
+                            <span class="skill-badge-level">94%</span>
+                        </div>
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="Street Composition">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">Street Composition</span>
+                            <span class="skill-badge-level">90%</span>
+                        </div>
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="Color Science / Lightroom">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">Lightroom / Grading</span>
+                            <span class="skill-badge-level">95%</span>
+                        </div>
+                    </div>
+
+                    <!-- Creative Code Stack -->
+                    <div class="skills-group" id="skills-devops">
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="HTML5 Canvas">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">HTML5 Canvas</span>
+                            <span class="skill-badge-level">96%</span>
+                        </div>
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="GSAP / Anim Physics">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">GSAP / Anim Physics</span>
+                            <span class="skill-badge-level">95%</span>
+                        </div>
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="React / Next.js">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">React / Next.js</span>
+                            <span class="skill-badge-level">92%</span>
+                        </div>
+                        <div class="skill-badge-wrapper glass magnetic" data-skill="TypeScript">
+                            <span class="skill-badge-glow"></span>
+                            <span class="skill-badge-name">TypeScript</span>
+                            <span class="skill-badge-level">90%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SHOWCASE SECTION -->
+        <section class="projects-section scroll-reveal" id="projects">
+            <div class="section-header">
+                <span class="section-tag">// COMPLETED PROTOCOLS</span>
+                <h2 class="section-title">Interactive Creations.</h2>
+                <div class="project-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="game">Games</button>
+                    <button class="filter-btn" data-filter="3d">3D Art</button>
+                    <button class="filter-btn" data-filter="photo">Photo</button>
+                    <button class="filter-btn" data-filter="uiux">UI/UX</button>
+                </div>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Project 1: Game Project -->
+                <div class="project-card glass magnetic-tilt" data-category="game" data-project="0">
+                    <div class="project-img-wrapper">
+                        <img src="assets/project_game.jpg" alt="Aetheria Odyssey Mockup" class="project-img">
+                        <div class="project-overlay-glow"></div>
+                        <div class="project-badge">GAME PROGRAMMING</div>
+                    </div>
+                    <div class="project-info">
+                        <span class="proj-num">01 / AETHERIA ODYSSEY</span>
+                        <h3>Aetheria Odyssey</h3>
+                        <p>An immersive third-person adventure game prototype built in Unreal Engine 5. Focuses on gameplay loop C++ scripting, custom player controller physics, and volumetric neon forest environmental art.</p>
+                        <div class="project-tags">
+                            <span>Unreal Engine 5</span>
+                            <span>C++</span>
+                            <span>Niagara VFX</span>
+                            <span>Blueprints</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: 3D Art -->
+                <div class="project-card glass magnetic-tilt" data-category="3d" data-project="1">
+                    <div class="project-img-wrapper">
+                        <img src="assets/project_3d_design.jpg" alt="Neo-Gear Sculpture Mockup" class="project-img">
+                        <div class="project-overlay-glow"></div>
+                        <div class="project-badge">3D DESIGN / ART</div>
+                    </div>
+                    <div class="project-info">
+                        <span class="proj-num">02 / NEO-GEAR MECHANISM</span>
+                        <h3>Neo-Gear Sculpture</h3>
+                        <p>A procedural hard-surface 3D modeling study. Focused on high-fidelity refraction glass, complex mechanical subdivisions, and Substance metallic textures. Rendered in Cycles.</p>
+                        <div class="project-tags">
+                            <span>Blender</span>
+                            <span>Substance Painter</span>
+                            <span>Cycles Render</span>
+                            <span>PBR Materials</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Photography -->
+                <div class="project-card glass magnetic-tilt" data-category="photo" data-project="2">
+                    <div class="project-img-wrapper">
+                        <img src="assets/project_ai.jpg" alt="Chasing Lumens Mockup" class="project-img">
+                        <div class="project-overlay-glow"></div>
+                        <div class="project-badge">PHOTOGRAPHY PORTFOLIO</div>
+                    </div>
+                    <div class="project-info">
+                        <span class="proj-num">03 / CHASING LUMENS</span>
+                        <h3>Chasing Lumens</h3>
+                        <p>A cinematic digital gallery cataloging raw street and architectural photography. Highlights moody atmospheric exposures, wet street refractions, and neon contrast studies.</p>
+                        <div class="project-tags">
+                            <span>Street Photography</span>
+                            <span>Lightroom</span>
+                            <span>Composition</span>
+                            <span>Color Theory</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: UI/UX Case Study -->
+                <div class="project-card glass magnetic-tilt" data-category="uiux" data-project="3">
+                    <div class="project-img-wrapper">
+                        <img src="assets/project_security.jpg" alt="Horizon Interface Launcher Mockup" class="project-img">
+                        <div class="project-overlay-glow"></div>
+                        <div class="project-badge">UI/UX CASE STUDY</div>
+                    </div>
+                    <div class="project-info">
+                        <span class="proj-num">04 / HORIZON INTERFACE</span>
+                        <h3>Horizon launcher</h3>
+                        <p>A futuristic game launcher and cockpit HUD dashboard concept. Emphasizes sleek interactive panel hierarchies, responsive visual overlays, and magnetic spring micro-animations.</p>
+                        <div class="project-tags">
+                            <span>Figma Design</span>
+                            <span>Interaction Physics</span>
+                            <span>GSAP Motion</span>
+                            <span>Next.js</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECT DETAIL MODAL OVERLAY -->
+        <div class="project-modal" id="project-modal">
+            <div class="modal-bg-overlay" id="modal-bg-overlay"></div>
+            <div class="modal-content glass">
+                <button class="modal-close-btn" id="modal-close-btn">
+                    <i data-lucide="x"></i>
+                </button>
+                <div class="modal-scroll-container">
+                    <div class="modal-hero-image-wrapper">
+                        <img src="" alt="Project Image" id="modal-img">
+                        <div class="modal-image-overlay"></div>
+                    </div>
+                    <div class="modal-body-content">
+                        <div class="modal-meta">
+                            <span class="modal-num" id="modal-num">01</span>
+                            <span class="modal-category-badge" id="modal-category">AI</span>
+                        </div>
+                        <h2 class="modal-title" id="modal-title">Project Title</h2>
+                        <p class="modal-lead" id="modal-desc">Project Description goes here.</p>
+
+                        <!-- Project Statistics Bento Layout -->
+                        <div class="modal-stats-grid">
+                            <div class="modal-stat-box glass">
+                                <div class="m-stat-label">FPS PERFORMANCE</div>
+                                <div class="m-stat-val text-glow-cyan" id="modal-stat-tps">120 FPS</div>
+                            </div>
+                            <div class="modal-stat-box glass">
+                                <div class="m-stat-label">3D GEOMETRY</div>
+                                <div class="m-stat-val text-glow-green" id="modal-stat-latency">140k Polys</div>
+                            </div>
+                            <div class="modal-stat-box glass">
+                                <div class="m-stat-label">USER RATING</div>
+                                <div class="m-stat-val text-glow-purple" id="modal-stat-accuracy">4.9 / 5.0</div>
+                            </div>
+                        </div>
+
+                        <div class="modal-details-grid">
+                            <div class="modal-details-col">
+                                <h3>Overview &amp; Architecture</h3>
+                                <p id="modal-details-overview">Details detailing structural patterns of the application go here. The system interfaces with complex neural architectures to coordinate workloads across server nodes.</p>
+                            </div>
+                            <div class="modal-details-col">
+                                <h3>Tech Stack Integration</h3>
+                                <div class="modal-tech-list" id="modal-tech-list">
+                                    <!-- Dynamic -->
+                                </div>
+                                <div class="modal-action-buttons">
+                                    <a href="#" class="btn btn-primary magnetic" id="modal-live-link">
+                                        <span>Launch Sandbox</span>
+                                        <i data-lucide="external-link"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-secondary magnetic" id="modal-repo-link">
+                                        <span>Browse Code</span>
+                                        <i data-lucide="github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACHIEVEMENTS SECTION -->
+        <section class="achievements-section scroll-reveal" id="achievements">
+            <div class="section-header">
+                <span class="section-tag">// ARCHIVED MILESTONES</span>
+                <h2 class="section-title">Achievements.</h2>
+                <p class="section-subtitle">Major career milestones. Hover to bridge connections, click to boost system experience score (+100 XP).</p>
+            </div>
+
+            <div class="achievements-timeline">
+                <div class="timeline-trail-glow"></div>
+                
+                <!-- Achievement 1 -->
+                <div class="achievement-item glass magnetic-tilt" data-xp="100">
+                    <div class="ach-icon"><i data-lucide="award"></i></div>
+                    <div class="ach-content">
+                        <span class="ach-date">2025</span>
+                        <h3>[Achievement Title]</h3>
+                        <p>Won the regional Indie Game Mechanics Hackathon for C++ character physics controller heuristics.</p>
+                    </div>
+                    <div class="ach-click-hint">+100 XP</div>
+                </div>
+
+                <!-- Achievement 2 -->
+                <div class="achievement-item glass magnetic-tilt" data-xp="100">
+                    <div class="ach-icon"><i data-lucide="box"></i></div>
+                    <div class="ach-content">
+                        <span class="ach-date">2024</span>
+                        <h3>[Achievement Title]</h3>
+                        <p>Featured in a global 3D modeling and environment render showcase for procedural architecture modeling.</p>
+                    </div>
+                    <div class="ach-click-hint">+100 XP</div>
+                </div>
+
+                <!-- Achievement 3 -->
+                <div class="achievement-item glass magnetic-tilt" data-xp="100">
+                    <div class="ach-icon"><i data-lucide="camera"></i></div>
+                    <div class="ach-content">
+                        <span class="ach-date">2023</span>
+                        <h3>[Achievement Title]</h3>
+                        <p>Selected work displayed in a national moody street photography physical gallery exhibition.</p>
+                    </div>
+                    <div class="ach-click-hint">+100 XP</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION SECTION -->
+        <section class="education-section scroll-reveal" id="education">
+            <div class="section-header">
+                <span class="section-tag">// KNOWLEDGE DEPOT</span>
+                <h2 class="section-title">The Journey.</h2>
+            </div>
+
+            <div class="education-container">
+                <div class="education-timeline-line">
+                    <div class="journey-progress-bar" id="journey-progress-bar"></div>
+                </div>
+                
+                <!-- Education Item 1 -->
+                <div class="education-card-wrapper left-aligned">
+                    <div class="edu-dot"></div>
+                    <div class="education-card glass magnetic-tilt">
+                        <span class="edu-span">2022 - Present</span>
+                        <h3>[Degree Name / Course]</h3>
+                        <p class="edu-institution">[University / Institution Name]</p>
+                        <p class="edu-description">Focusing on Game Design Theory, 3D Computer Graphics Foundations, and Human-Computer Interaction.</p>
+                    </div>
+                </div>
+
+                <!-- Education Item 2 -->
+                <div class="education-card-wrapper right-aligned">
+                    <div class="edu-dot"></div>
+                    <div class="education-card glass magnetic-tilt">
+                        <span class="edu-span">2020 - 2021</span>
+                        <h3>[Degree Name / Course]</h3>
+                        <p class="edu-institution">[Academy / Certifying Body]</p>
+                        <p class="edu-description">Intensive deep-dive studies into UI frameworks, browser rendering pipelines, and computer graphics foundations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section class="contact-section scroll-reveal" id="contact">
+            <div class="section-header">
+                <span class="section-tag">// SECURE UPLINK</span>
+                <h2 class="section-title">Initiate Contact.</h2>
+                <p class="section-subtitle">Establish a secure web session and push variables directly to my inbox.</p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Direct Channels -->
+                <div class="contact-info-col">
+                    <div class="glass channel-box">
+                        <h3>Direct Nodes</h3>
+                        <div class="channel-list">
+                            <a href="mailto:placeholder@neural.io" class="channel-item magnetic">
+                                <i data-lucide="mail"></i>
+                                <div>
+                                    <span class="channel-lbl">EMAIL NODE</span>
+                                    <span class="channel-val">[your.email@example.com]</span>
+                                </div>
+                            </a>
+                            <a href="https://github.com" target="_blank" class="channel-item magnetic">
+                                <i data-lucide="github"></i>
+                                <div>
+                                    <span class="channel-lbl">GITHUB PORT</span>
+                                    <span class="channel-val">github.com/[placeholder]</span>
+                                </div>
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" class="channel-item magnetic">
+                                <i data-lucide="linkedin"></i>
+                                <div>
+                                    <span class="channel-lbl">LINKEDIN LINK</span>
+                                    <span class="channel-val">linkedin.com/in/[placeholder]</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-col">
+                    <form class="contact-form glass" id="contact-form" autocomplete="off">
+                        <div class="form-row">
+                            <div class="input-wrapper">
+                                <label for="form-name">NODE IDENTIFIER (NAME)</label>
+                                <input type="text" id="form-name" required placeholder="Enter name...">
+                                <span class="input-glow-line"></span>
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="form-email">ROUTING ENDPOINT (EMAIL)</label>
+                                <input type="email" id="form-email" required placeholder="Enter email...">
+                                <span class="input-glow-line"></span>
+                            </div>
+                        </div>
+                            <div class="input-wrapper">
+                                <label for="form-subject">TOPIC ROUTE</label>
+                                <input type="text" id="form-subject" required placeholder="Game project, 3D render, photo shoot, UI design...">
+                                <span class="input-glow-line"></span>
+                            </div>
+                        <div class="input-wrapper">
+                            <label for="form-message">TRANSMISSION BODY</label>
+                            <textarea id="form-message" rows="5" required placeholder="Initiating message body details..."></textarea>
+                            <span class="input-glow-line"></span>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary magnetic" id="submit-btn">
+                            <span>Establish Connection</span>
+                            <i data-lucide="send"></i>
+                        </button>
+                    </form>
+
+                    <!-- Success State Output Terminal Receipt -->
+                    <div class="receipt-terminal glass" id="receipt-terminal">
+                        <div class="receipt-header">
+                            <div class="terminal-dots">
+                                <span class="t-dot green"></span>
+                                <span class="t-dot green"></span>
+                                <span class="t-dot green"></span>
+                            </div>
+                            <span>uplink-status // verified</span>
+                        </div>
+                        <div class="receipt-body">
+                            <div class="r-title">[TRANSACTION RECIPIENT // ESTABLISHED]</div>
+                            <div class="r-line"><span class="r-lbl">SESSION_ID:</span> <span class="r-val" id="receipt-session">#NEURAL-8293-XP</span></div>
+                            <div class="r-line"><span class="r-lbl">SENDER:</span> <span class="r-val" id="receipt-sender">[Name]</span></div>
+                            <div class="r-line"><span class="r-lbl">ENDPOINT:</span> <span class="r-val" id="receipt-endpoint">[Email]</span></div>
+                            <div class="r-line"><span class="r-lbl">TIMESTAMP:</span> <span class="r-val" id="receipt-time">2026-07-02</span></div>
+                            <div class="r-line"><span class="r-lbl">INTEGRITY:</span> <span class="r-val text-glow-green">VERIFIED (100%)</span></div>
+                            <div class="r-line text-glow-cyan">// Thank you. Your variable has been piped.</div>
+                        </div>
+                        <button class="btn btn-secondary" id="receipt-reset-btn">Send Another Transmission</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-copy">&copy; 2026 [Your Name]. Crafted in luxury, inspired by Stripe, Framer, and Apple.</p>
+            <p class="footer-sys">SYSTEM STATUS: <span class="text-glow-green">100% ONLINE</span></p>
+        </div>
+    </footer>
+
+    <!-- GSAP CDN Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- main script -->
+    <script src="main.js"></script>
+</body>
+</html>
